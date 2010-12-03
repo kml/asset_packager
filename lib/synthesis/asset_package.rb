@@ -2,7 +2,7 @@ module Synthesis
   class AssetPackage
 
     @asset_base_path    = "#{Rails.root}/public"
-    @asset_packages_yml = File.exists?("#{Rails.root}/config/asset_packages.yml") ? YAML.load_file("#{Rails.root}/config/asset_packages.yml") : nil
+    @asset_packages_yml = File.exist?("#{Rails.root}/config/asset_packages.yml") ? YAML.load_file("#{Rails.root}/config/asset_packages.yml") : nil
   
     # singleton methods
     class << self
