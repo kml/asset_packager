@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{asset_packager}
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dieinzige"]
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{Minify for rails js and css}
   s.email = %q{dieinzige@gmail.com}
   s.extra_rdoc_files = ["README"]
-  s.files = ["CHANGELOG", "README", "Rakefile", "about.yml", "init.rb", "lib/jsmin.rb", "lib/asset_packager.rb","lib/synthesis/asset_package.rb", "lib/synthesis/asset_package_helper.rb", "lib/tasks/asset_packager_tasks.rake", "test/asset_package_helper_development_test.rb", "test/asset_package_helper_production_test.rb", "test/asset_packager_test.rb", "test/asset_packages.yml", "test/assets/javascripts/application.js", "test/assets/javascripts/bar.js", "test/assets/javascripts/controls.js", "test/assets/javascripts/dragdrop.js", "test/assets/javascripts/effects.js", "test/assets/javascripts/foo.js", "test/assets/javascripts/prototype.js", "test/assets/stylesheets/bar.css", "test/assets/stylesheets/foo.css", "test/assets/stylesheets/header.css", "test/assets/stylesheets/screen.css", "test/assets/stylesheets/subdir/bar.css", "test/assets/stylesheets/subdir/foo.css"]
+  s.files = Dir["#{File.dirname(__FILE__)}/**/*"]
   s.homepage = %q{http://github.com/Dieinzige/asset_packager}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
@@ -30,4 +30,10 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
   end
+
+  # Google V8 embedded within Ruby
+  s.add_dependency(%q<therubyracer>, [">= 0"])
+  # Ruby wrapper for UglifyJS JavaScript compressor.
+  s.add_dependency(%q<uglifier>, [">= 0"])
 end
+

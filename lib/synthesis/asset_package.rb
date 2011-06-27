@@ -1,3 +1,5 @@
+require 'uglifier'
+
 module Synthesis
   class AssetPackage
 
@@ -153,28 +155,16 @@ module Synthesis
       end
 
       def compress_js(source)
-        jsmin_path = File.join(File.dirname(__FILE__),'..')
         tmp_path = "#{Rails.root}/tmp/#{@target}_packaged"
 
         # write out to a temp file
         File.open("#{tmp_path}_uncompressed.js", "w") {|f| f.write(source) }
 
-        # compress file with JSMin library
-        # FIXME
-        puts `ruby #{jsmin_path}/jsmin.rb <#{tmp_path}_uncompressed.js >#{tmp_path}_compressed.js \n`
-
-        # read it back in and trim it
-        #result = ""
-        #File.open("#{tmp_path}_compressed.js", "r") { |f| result += f.read.strip }
-
-        result = ""
-        # FIXME
-        file = File.exists?("#{tmp_path}_compressed.js") ? "#{tmp_path}_compressed.js" : "#{tmp_path}_uncompressed.js"
-        File.open(file, "r") { |f| result += f.read.strip }
+        # compress file
+        result = Uglifier.new.compile(File.read("#{tmp_path}_uncompressed.js"))
 
         # delete temp files if they exist
         File.delete("#{tmp_path}_uncompressed.js") if File.exists?("#{tmp_path}_uncompressed.js")
-        File.delete("#{tmp_path}_compressed.js") if File.exists?("#{tmp_path}_compressed.js")
 
         result
       end
